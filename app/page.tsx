@@ -112,8 +112,8 @@ export default function Home() {
           {/* Stats — Bebas Neue numbers as authority anchors, Sonder style */}
           <div className="grid grid-cols-3 border-t pt-10" style={{ borderColor: "var(--color-border)" }}>
             {[
-              ["89%", "of solopreneurs cite finance as their #1 pain point"],
-              ["48%", "have gone a full month without paying themselves"],
+              ["68%", "of solopreneurs have less than 6 months of savings or no safety net"],
+              ["48%", "have experienced a month or more without income"],
               ["1 weekend", "to set up the full system — free tools, no app required"],
             ].map(([stat, label], i) => (
               <div
@@ -192,7 +192,7 @@ export default function Home() {
             Financial tools were built for people with a fixed paycheck.
           </h2>
           <p className="text-lg leading-relaxed max-w-2xl mb-12" style={{ color: "var(--color-muted)" }}>
-            YNAB. Mint. QuickBooks. Every piece of conventional financial advice assumes you get
+            YNAB. QuickBooks. Credit Karma. Every piece of conventional financial advice assumes you get
             paid the same amount on the same date every two weeks. Your income looks like
             $11,000 one month and $3,200 the next. The existing system has no idea what to
             do with that — so it just stresses you out instead.
@@ -214,7 +214,7 @@ export default function Home() {
           </div>
 
           <p className="text-sm leading-relaxed max-w-xl" style={{ color: "var(--color-muted)" }}>
-            Every existing solution is either a $30/month SaaS subscription built for businesses,
+            Every existing solution is either a monthly SaaS subscription built for businesses,
             or generic advice written for people with a salary. This is neither.
           </p>
         </div>
