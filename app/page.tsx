@@ -9,7 +9,7 @@ export default function Home() {
             href="#get"
             className="bg-teal text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-teal-dark transition-colors"
           >
-            Get the Guide →
+            Get the System →
           </a>
         </div>
       </nav>
@@ -27,9 +27,9 @@ export default function Home() {
         </h1>
 
         <p className="text-xl text-gray-500 max-w-2xl mb-10 leading-relaxed">
-          The Feast &amp; Famine Fix is a step-by-step financial operating system
-          built for freelancers with variable income. Set it up once. Run it
-          in 20 minutes a month.
+          Built for freelancers with variable income — not salaried employees.
+          A 5-account system, three formulas, and a 20-minute monthly ritual
+          you can implement this weekend using a free spreadsheet and two bank accounts.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 items-start mb-12">
@@ -38,7 +38,7 @@ export default function Home() {
             href="https://gumroad.com"
             className="bg-teal text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-teal-dark transition-colors"
           >
-            Get the Guide — $27
+            Start This Weekend — $27
           </a>
           <p className="text-sm text-gray-400 mt-3 sm:mt-5">
             One-time payment · Instant download · PDF
@@ -50,13 +50,34 @@ export default function Home() {
           {[
             ['89%', 'of solopreneurs cite finance as their #1 pain point'],
             ['48%', 'have gone a full month without paying themselves'],
-            ['9 pages', 'of actionable systems — no fluff, no app required'],
+            ['1 weekend', 'to set up the full system — free spreadsheet, no app required'],
           ].map(([stat, label]) => (
             <div key={stat}>
               <p className="text-3xl font-bold text-navy">{stat}</p>
               <p className="text-sm text-gray-400 mt-1 leading-snug">{label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* WHO IT'S FOR */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-teal font-semibold text-sm tracking-widest mb-4">WHO IT&apos;S FOR</p>
+          <h2 className="text-3xl font-bold text-navy mb-10">Built for you if...</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              'Your income varies significantly month to month',
+              "You've had at least one month where you couldn't pay yourself",
+              'You want a system — not an app subscription',
+              "You're a freelancer, consultant, coach, or solo service provider",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3 bg-white rounded-lg p-4 border border-gray-100">
+                <span className="text-teal font-bold mt-0.5">✓</span>
+                <p className="text-gray-700">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -74,9 +95,13 @@ export default function Home() {
             $11,000 one month and $3,200 the next. The existing system has no idea what to
             do with that — so it just stresses you out instead.
           </p>
-          <blockquote className="border-l-4 border-teal pl-6 text-gray-200 text-lg italic">
+          <blockquote className="border-l-4 border-teal pl-6 text-gray-200 text-lg italic mb-6">
             &ldquo;This isn&rsquo;t a discipline problem. It&rsquo;s an infrastructure problem.&rdquo;
           </blockquote>
+          <p className="text-gray-400 text-sm">
+            Every existing solution is either a $30/month SaaS subscription built for businesses,
+            or generic advice written for people with a salary. This is neither.
+          </p>
         </div>
       </section>
 
@@ -92,27 +117,27 @@ export default function Home() {
             {
               num: '01',
               title: 'The 5-Account System',
-              desc: 'Separate your money into five accounts with five distinct jobs. Stop confusing income with profit — and stop wondering if you can actually afford something.',
+              desc: "Separate your money into five accounts with five distinct jobs. After one setup session, you'll know exactly what's yours to spend — without mental math, without spreadsheet anxiety, without checking six accounts.",
             },
             {
               num: '02',
               title: 'The Tax Vault Formula',
-              desc: "A dead-simple percentage rule that means you never owe the IRS money you've already spent. Set it once, automate it, forget about tax panic forever.",
+              desc: "A dead-simple percentage rule applied the moment each payment lands. After this, every payment you receive is already split. Tax season stops being a surprise and starts being a line item.",
             },
             {
               num: '03',
               title: 'The 90-Day Buffer Target',
-              desc: 'One number that tells you exactly how much runway you need. Once funded, a slow month becomes a minor inconvenience instead of a crisis.',
+              desc: "One number that tells you exactly how much runway you need. Once you hit it, a $3k month doesn't mean a missed rent payment — it means a planned, covered dip. The system absorbs it.",
             },
             {
               num: '04',
               title: 'The Retainer Conversion Playbook',
-              desc: 'The exact script and framework for converting past clients into predictable monthly income. Two retainer clients eliminates most income volatility.',
+              desc: "The exact script and framework for converting past clients into predictable monthly income. Two converted clients at $2k/month means your base is covered before you send a single proposal. Everything else is upside.",
             },
             {
               num: '05',
               title: 'The 20-Minute Monthly Review',
-              desc: 'A six-step monthly ritual that keeps the whole system running. No accountant needed. No software required. Just 20 minutes on the last day of the month.',
+              desc: "Last day of the month: 20 minutes, six steps, done. You'll know your tax position, your buffer status, and your outstanding invoices — all before next month starts. No accountant needed.",
             },
           ].map(({ num, title, desc }) => (
             <div
@@ -129,29 +154,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHO IT'S FOR */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-teal font-semibold text-sm tracking-widest mb-4">WHO IT&apos;S FOR</p>
-          <h2 className="text-3xl font-bold text-navy mb-10">Built for you if...</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              'Your income varies significantly month to month',
-              "You've had at least one month where you couldn't pay yourself",
-              'You know you should be better with money but no guide fits your life',
-              'You\'re tired of generic budgeting advice written for employees',
-              'You want a system — not an app subscription',
-              'You\'re a freelancer, consultant, coach, or solo service provider',
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-3 bg-white rounded-lg p-4 border border-gray-100">
-                <span className="text-teal font-bold mt-0.5">✓</span>
-                <p className="text-gray-700">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="max-w-4xl mx-auto px-6 py-24 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4">
@@ -164,9 +166,9 @@ export default function Home() {
           href="https://gumroad.com"
           className="inline-block bg-teal text-white font-bold text-xl px-10 py-5 rounded-xl hover:bg-teal-dark transition-colors mb-4"
         >
-          Get the Guide — $27
+          Start This Weekend — $27
         </a>
-        <p className="text-gray-400 text-sm">Instant download after purchase</p>
+        <p className="text-gray-400 text-sm">One-time payment · Instant download after purchase</p>
       </section>
 
       {/* FOOTER */}
