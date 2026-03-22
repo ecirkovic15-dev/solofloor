@@ -2,13 +2,26 @@
 
 @theme inline {
   --color-navy: #1B2E4B;
+  --color-navy-light: #243d61;
   --color-teal: #2A7F62;
   --color-teal-dark: #1f6049;
+  --color-teal-muted: #e8f4f0;
   --font-sans: var(--font-geist-sans);
+  --animate-fade-up: fade-up 0.5s ease-out both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: #ffffff;
   color: #1B2E4B;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
