@@ -20,14 +20,14 @@
 
 const fs        = require('fs');
 const path      = require('path');
-const { exec }  = require('child_process');
+const { exec, execSync } = require('child_process');
 const readline  = require('readline');
 const Anthropic = require('@anthropic-ai/sdk');
 
 const SEEN_PATH      = path.join(__dirname, '../.reddit-seen.json');
 const MATCHES_PATH   = path.join(__dirname, '../logs/reddit-matches.json');
 const COMMENTED_PATH = path.join(__dirname, '../logs/commented-posts.json');
-const DRAFT_PATH     = path.join(__dirname, '../logs/comment-draft.txt');
+const DRAFTS_DIR     = path.join(__dirname, '../logs/drafts');
 const INTERVAL_MS    = 15 * 60 * 1000;
 
 const OUR_USERNAME = 'sixmonthrunway';
@@ -178,16 +178,19 @@ POST BODY: ${post.selftext}
 EXISTING COMMENTS:
 ${topComments}
 
+Read the existing comments carefully. Notice the tone — is it frustrated, jokey, practical, overwhelmed? Match it exactly.
+
 Write a single comment that:
-- Is 3-5 sentences maximum — match the length of the other comments in the thread, never longer
-- Sounds like a real person who has freelanced, not a consultant or coach
-- Only references another commenter if their comment is still visible and clearly not deleted
-- Adds something genuinely useful not yet said: the concept of knowing your monthly floor, separating income from what you actually pay yourself, building a buffer so your lifestyle stops tracking your invoices
+- Reacts to something specific in the thread — a word someone used, a situation described, an assumption being made — not generically to the post title
+- Sounds like a person dashing off a reply, not composing an answer. Rough edges are fine.
+- Is 2-4 sentences. No more. Match the length of the other comments.
+- Brings in ONE idea from personal experience: knowing your floor (the bare minimum you need each month), paying yourself a fixed amount regardless of what came in, or keeping a buffer so slow months don't feel like emergencies. Pick whichever fits the thread best — don't cram all three in.
+- If the thread has humour or frustration, reflect that. Don't be relentlessly helpful and earnest if everyone else is venting.
+- If reacting to a specific commenter's point, tag them naturally using u/username format (e.g. "the framing u/username used" or "what u/username said about X") — only do this if their comment is clearly not deleted
 - Does NOT mention any product, tool, website, or SoloFloor
-- Does NOT use em dashes — use commas or end the sentence instead
-- No bullet points, no headers, one flowing paragraph
-- Conversational and direct, matching the length and tone of the other comments
-- Ends with a short open offer to share more if useful
+- Does NOT use em dashes — use commas or just end the sentence
+- No bullet points, no headers, no "happy to share more" if it sounds tacked on — only add an open offer if it genuinely fits
+- Never starts with "I" as the first word
 
 Return only the comment text, nothing else.`
     }],
@@ -234,7 +237,9 @@ Return only the reply text, nothing else.`
 
 // ─── DRAFT FILE ───────────────────────────────────────────────────────────────
 function saveDraft(entry, comment, type = 'FIRST COMMENT') {
-  fs.mkdirSync(path.dirname(DRAFT_PATH), { recursive: true });
+  fs.mkdirSync(DRAFTS_DIR, { recursive: true });
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 16);
+  const DRAFT_PATH = path.join(DRAFTS_DIR, `draft-${timestamp}.txt`);
 
   const lines = [
     `TYPE: ${type}`,
@@ -249,7 +254,7 @@ function saveDraft(entry, comment, type = 'FIRST COMMENT') {
     `--- NEXT STEP ---`,
     `1. Copy the comment above`,
     `2. Visit the URL and post it as u/${OUR_USERNAME}`,
-    `3. Come back to the terminal and press Enter to register + get the next post`,
+    `3. Tell Claude "posted it" to register and get the next post`,
     ``,
     `--- META ---`,
     `Signal score : ${entry.score || 'n/a'}`,
@@ -258,8 +263,8 @@ function saveDraft(entry, comment, type = 'FIRST COMMENT') {
   ];
 
   fs.writeFileSync(DRAFT_PATH, lines.join('\n'));
-  exec(`open "${DRAFT_PATH}"`);
-  console.log(`  Draft saved and opened: logs/comment-draft.txt`);
+  execSync(`open "${DRAFT_PATH}"`);
+  console.log(`  Draft saved and opened: ${path.relative(process.cwd(), DRAFT_PATH)}`);
 }
 
 // ─── COMMENTED POSTS TRACKING ─────────────────────────────────────────────────
@@ -320,21 +325,13 @@ function saveMatches(matches) {
 // ─── CORE SCAN ───────────────────────────────────────────────────────────────
 // High-signal phrases to search for directly — weight-2 keywords only
 const SEARCH_QUERIES = [
-  'feast and famine',
-  'feast or famine',
-  'inconsistent income',
-  'irregular income',
-  'unpredictable income',
-  'variable income',
-  'lumpy income',
-  'invoice to invoice',
+  'feast and famine freelance',
+  'inconsistent income freelance',
+  'irregular income freelance',
   'pay myself freelance',
+  'cash flow self employed',
   'slow month freelance',
-  'dry spell freelance',
-  'cash flow freelance',
-  'save for taxes freelance',
   'freelance budget',
-  'between projects no income',
 ];
 
 async function scanForNewMatches(seen, matches) {
@@ -368,8 +365,8 @@ async function scanForNewMatches(seen, matches) {
           try {
             const comment = await generateFirstComment(entry);
             if (comment) {
+              seen.add(entry.id); // mark seen so we don't re-draft it
               saveDraft(entry, comment, 'FIRST COMMENT');
-              await waitForConfirm(entry, seen);
               return newCount + 1; // stop after one — run again for the next
             }
           } catch (err) {
@@ -378,11 +375,11 @@ async function scanForNewMatches(seen, matches) {
         }
       }
 
-      await sleep(1100);
+      await sleep(2000);
 
     } catch (err) {
       console.warn(`  ⚠  Search "${query}": ${err.message}`);
-      if (err.message === 'rate limited') await sleep(60000);
+      if (err.message === 'rate limited') await sleep(90000);
     }
   }
 

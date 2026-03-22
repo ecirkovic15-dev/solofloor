@@ -1,0 +1,18 @@
+TYPE: FIRST COMMENT
+POST: Early 20s, freelance income, overspending + confused about credit cards – how should I prioritize saving vs investing?
+URL:  https://reddit.com/r/personalfinance/comments/1rezkj5/early_20s_freelance_income_overspending_confused/
+SUB:  r/personalfinance
+
+--- DRAFT COMMENT (copy everything below this line) ---
+
+What u/OutlandishnessFew484 said about moving money immediately is the key thing honestly, but I'd add that with income this variable you need to know your actual floor first, like what is the bare minimum you need to survive a $475 month, because that number changes everything about how aggressively you can save the rest. For me figuring that out stopped slow months from feeling like a crisis and more like something I'd already planned for.
+
+--- NEXT STEP ---
+1. Copy the comment above
+2. Visit the URL and post it as u/sixmonthrunway
+3. Tell Claude "posted it" to register and get the next post
+
+--- META ---
+Signal score : 3
+Keywords     : variable income, emergency fund
+Generated    : 22/03/2026, 8:50:09 pm

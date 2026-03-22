@@ -5,7 +5,7 @@ SUB:  r/personalfinance
 
 --- DRAFT COMMENT (copy everything below this line) ---
 
-What u/franciscolorado described is basically what I landed on too, just letting one paycheck clear first so you have a real number to work backward from instead of guessing at methodology. Once you know your floor for the month you can set 4c to make up the exact difference and stop chasing it every quarter.
+What u/franciscolorado described is basically what I landed on too, just let one paycheck clear so you can see what your employer actually withholds and then work backwards from there. Way less painful than trying to predict it upfront, especially when bonuses are throwing off the whole calculation mid-year.
 
 --- NEXT STEP ---
 1. Copy the comment above
@@ -15,4 +15,4 @@ What u/franciscolorado described is basically what I landed on too, just letting
 --- META ---
 Signal score : 2
 Keywords     : variable income
-Generated    : 22/03/2026, 8:47:06 pm
+Generated    : 22/03/2026, 8:49:07 pm
