@@ -192,10 +192,11 @@ export default function Home() {
             Financial tools were built for people with a fixed paycheck.
           </h2>
           <p className="text-lg leading-relaxed max-w-2xl mb-12" style={{ color: "var(--color-muted)" }}>
-            YNAB. QuickBooks. Credit Karma. Every piece of conventional financial advice assumes you get
-            paid the same amount on the same date every two weeks. Your income looks like
-            $11,000 one month and $3,200 the next. The existing system has no idea what to
-            do with that — so it just stresses you out instead.
+            Most budgeting advice was written for someone with a stable salary, a predictable
+            paycheck, and expenses that look the same every month. &ldquo;Track your spending.&rdquo;
+            &ldquo;Save 20%.&rdquo; &ldquo;Build an emergency fund.&rdquo; None of it accounts for the month you earn
+            $11,000, followed by the month you earn $3,200. The maths assumes an income that
+            isn&rsquo;t yours.
           </p>
 
           {/* Oversized quote mark + blockquote — editorial drama from Sonder's style */}
