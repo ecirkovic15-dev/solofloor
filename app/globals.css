@@ -1,12 +1,28 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #1B2E4B;
-  --color-navy-light: #243d61;
-  --color-teal: #2A7F62;
-  --color-teal-dark: #1f6049;
-  --color-teal-muted: #e8f4f0;
-  --font-sans: var(--font-geist-sans);
+  /* Dark base — Sonder-style near-black, rooted in navy rather than neutral */
+  --color-background: #07111f;
+  --color-surface:    #0d1b2e;
+  --color-surface-2:  #132438;
+  --color-border:     #1e3352;
+
+  /* Brand */
+  --color-navy:       #1B2E4B;
+  --color-teal:       #3aaa80;       /* brighter variant for legibility on dark bg */
+  --color-teal-dark:  #2a8a64;
+  --color-teal-glow:  #3aaa8033;     /* for box-shadow glows */
+  --color-teal-muted: #162e24;
+
+  /* Text */
+  --color-text:       #eef2ff;
+  --color-muted:      #6b85ab;
+
+  /* Fonts */
+  --font-sans:        var(--font-geist-sans);
+  --font-display:     var(--font-bebas), 'Bebas Neue', sans-serif;
+
+  /* Animation */
   --animate-fade-up: fade-up 0.5s ease-out both;
 }
 
@@ -20,8 +36,50 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #1B2E4B;
+  background: var(--color-background);
+  color: var(--color-text);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Display font utility — Bebas Neue for large impact headings */
+.font-display {
+  font-family: var(--font-bebas), 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* ── Reusable hover utilities (CSS-only, no JS event handlers needed) ── */
+
+.card-hover {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  border-color: var(--color-teal) !important;
+  box-shadow: 0 8px 32px var(--color-teal-glow);
+  transform: translateY(-2px);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, var(--color-teal), var(--color-teal-dark));
+  color: #fff;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-teal:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 48px var(--color-teal-glow);
+}
+
+.btn-teal-sm {
+  background: var(--color-teal);
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.btn-teal-sm:hover {
+  background: var(--color-teal-dark);
+}
+
+/* Who It's For / card text brightens on hover */
+.card-hover:hover .card-text {
+  color: var(--color-text);
 }
